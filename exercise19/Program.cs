@@ -1,33 +1,48 @@
-﻿Console.Write("Enter a 5-digit number: ");
+﻿int[] reverseArray(int number, int numberLength)
+{
+    int[] revArray = new int[numberLength];
+    int divider = 10;
+    int index = Convert.ToInt32(numberLength)-1;
+
+    while (index>=0)
+    {
+        revArray[index] = number%divider;
+        number /= divider;
+        index--;
+    }
+    return revArray;
+}
+
+int[] directArray(int number,int numberLength)
+{
+    int[] dirArray = new int[numberLength];
+    int divider = 10;
+    int index = 0;
+
+    while (index<numberLength)
+    {
+        dirArray[index] = number%divider;
+        number /= divider;
+        index++;
+    }
+    return dirArray;
+}
+
+void printPalindrome(int[] revArray,int[] dirArray)
+{
+    bool comparisonArrays = revArray.SequenceEqual(dirArray);
+
+    if (comparisonArrays == true)
+    {
+        Console.WriteLine("Your number is a palindrome");
+    }
+    else Console.WriteLine("Your number is NOT a palindrome");
+}
+
+Console.Write("Enter a 5-digit number: ");
 int number = Convert.ToInt32(Console.ReadLine());
-int number2 = number;
 int numberLength = Convert.ToString(number).Length;
 
-int[] array1 = new int[numberLength];
-int[] array2 = new int[numberLength];
-int divider = 10;
-int index = Convert.ToInt32(numberLength)-1;
-
-while (index>=0)
-{
-    array1[index] = number%divider;
-    number /= divider;
-    index--;
-}
-
-index = 0;
-
-while (index<numberLength)
-{
-    array2[index] = number2%divider;
-    number2 /= divider;
-    index++;
-}
-
-bool comparisonArrays = array1.SequenceEqual(array2);
-
-if (comparisonArrays == true)
-{
-    Console.WriteLine("Your number is a palindrome");
-}
-else Console.WriteLine("Your number is NOT a palindrome");
+int[] revArray = reverseArray(number,numberLength);
+int[] dirArray = directArray(number,numberLength);
+printPalindrome(revArray,dirArray);
